@@ -1,15 +1,13 @@
-# DataFlair background removal 
 
-# import necessary packages
 import os
 import cv2
 import time
 import numpy as np
 import mediapipe as mp
 def background_removal(record):
-# initialize mediapipe 
+# initialize mediapipe
     mp_pose = mp.solutions.pose
-    mp_draw = mp.solutions.drawing_utils
+    mp_draw = mp.solutions.drawing_utilsresiz
     pose = mp_pose.Pose()
 
     mp_selfie_segmentation = mp.solutions.selfie_segmentation
@@ -34,7 +32,7 @@ def background_removal(record):
 
         RGB = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-    # get the result 
+    # get the result
         results = selfie_segmentation.process(RGB)
         results1 = pose.process(frame)
     # draw the detected pose on original video/ live stream
@@ -80,29 +78,29 @@ def background_removal(record):
         ratio_white = cv2.countNonZero(mask)/(frame.size/3)
         percent = ratio_white*100
         print(percent)
-        if (percent<record['wo9of']+5) :
+        if (percent<record['wo9of.png']+5) :
             cv2.putText(output_image,
-                'wou9ouf', 
-                (50, 50), 
-                font, 1, 
-                (255,0,0), 
-                2, 
+                'wou9ouf',
+                (50, 50),
+                font, 1,
+                (255,0,0),
+                2,
                 cv2.LINE_4)
-        elif (percent <record['wo9of']+5) :
+        elif (percent <record['roukou3.png']+5) :
             cv2.putText(output_image,
-                'Roukou3', 
-                (50, 50), 
-                font, 1, 
-                (255,0,0), 
-                2, 
+                'Roukou3',
+                (50, 50),
+                font, 1,
+                (255,0,0),
+                2,
                 cv2.LINE_4)
         else :
             cv2.putText(output_image,
-                'Soujoud', 
-                (50, 50), 
-                font, 1, 
-                (255,0,0), 
-                2, 
+                'Soujoud',
+                (50, 50),
+                font, 1,
+                (255,0,0),
+                2,
                 cv2.LINE_4)
         cv2.imshow("Output", output_image)
         cv2.imshow("Frame", frame)
@@ -122,9 +120,30 @@ def background_removal(record):
             bg_image = cv2.imread(image_path+'/'+images[image_index])
 
 
-# release the capture object and close all active windows 
+# release the capture object and close all active windows
     cap.release()
     cv2.destroyAllWindows()
 
 
 
+# fixer les mesures.
+from LaSAHW.image import capter
+from LaSAHW.test import percent
+
+print ("position de wo9of")
+ch="wo9of.png"
+capter(ch)
+pourcentage= percent(ch)
+record={ch:pourcentage,}
+print ("position de roukou3")
+ch="roukou3.png"
+capter(ch)
+pourcentage= percent(ch)
+record[ch]=pourcentage
+print ("position de wo9of")
+ch="soujoud.png"
+capter(ch)
+pourcentage= percent(ch)
+record[ch]=pourcentage
+print(record)
+background_removal(record)
