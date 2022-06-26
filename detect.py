@@ -34,8 +34,35 @@ while True:
             results = selfie_segmentation.process(RGB)
             mask = results.segmentation_mask
             cv2.imshow('mask',mask)
+<<<<<<< HEAD
+=======
+            # it returns true or false where the condition applies in the mask
+            condition = np.stack(
+                    (results.segmentation_mask,) * 3, axis=-1) > 0.6
+            output_image = np.where(condition, frame, bg_image)
+>>>>>>> 7f55e691af851e7f7db194e189fe025e32bb7efc
             bg_image = cv2.resize(mask, (width, height))
             font = cv2.FONT_HERSHEY_SIMPLEX
             ratio_white =cv2.countNonZero(bg_image)/216000
             percent =ratio_white
             print(percent)
+<<<<<<< HEAD
+=======
+            if percent > 60:
+                    output_image = cv2.putText(output_image,
+                               'bonne position',
+                                (10, 10),
+                                font, 1,
+                                (255, 0, 0),
+                                2,
+                                cv2.LINE_4)
+            else :
+                    output_image = cv2.putText(output_image,
+                        'positionnez-vous sur le bonhomme',
+                        (10, 10),
+                        font, 1,
+                        (255, 0, 0),
+                        2,
+                        cv2.LINE_4)
+            cv2.imshow("Output", output_image)
+>>>>>>> 7f55e691af851e7f7db194e189fe025e32bb7efc
