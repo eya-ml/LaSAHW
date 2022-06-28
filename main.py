@@ -4,10 +4,14 @@ import cv2
 import time
 import numpy as np
 import mediapipe as mp
+
+from LaSAHW.teste import position
+
+
 def background_removal(record):
 # initialize mediapipe
     mp_pose = mp.solutions.pose
-    mp_draw = mp.solutions.drawing_utilsresiz
+    mp_draw = mp.solutions.drawing_utils
     pose = mp_pose.Pose()
 
     mp_selfie_segmentation = mp.solutions.selfie_segmentation
@@ -125,11 +129,10 @@ def background_removal(record):
     cv2.destroyAllWindows()
 
 
-
 # fixer les mesures.
 from LaSAHW.image import capter
 from LaSAHW.test import percent
-
+position()
 print ("position de wo9of")
 ch="wo9of.png"
 capter(ch)
